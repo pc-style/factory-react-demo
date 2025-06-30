@@ -14,18 +14,18 @@
     "react-dom": "^18.3.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^14",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4",
-    "concurrently": "^8",
-    "electron": "^28.2.0",
-    "eslint": "^8",
-    "jsdom": "^26.1.0",
     "typescript": "^5",
     "vite": "^5",
+    "eslint": "^8",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "vitest": "^1",
-    "wait-on": "^7"
+    "@testing-library/react": "^14",
+    "electron": "^28.2.0",
+    "concurrently": "^8",
+    "wait-on": "^7",
+    "jsdom": "^22",
+    "@testing-library/jest-dom": "^6"
   }
 }
