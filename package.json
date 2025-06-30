@@ -14,18 +14,22 @@
     "react-dom": "^18.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4",
-    "typescript": "^5",
-    "vite": "^5",
-    "eslint": "^8",
+    "@testing-library/jest-dom": "^6",
+    "@testing-library/react": "^14",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "vitest": "^1",
-    "@testing-library/react": "^14",
-    "electron": "^28.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
+    "@typescript-eslint/parser": "^8.35.1",
+    "@vitejs/plugin-react": "^4",
     "concurrently": "^8",
-    "wait-on": "^7",
+    "electron": "^28.2.0",
+    "eslint": "^8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "jsdom": "^22",
-    "@testing-library/jest-dom": "^6"
+    "typescript": "^5",
+    "vite": "^5",
+    "vitest": "^1",
+    "wait-on": "^7"
   }
 }
