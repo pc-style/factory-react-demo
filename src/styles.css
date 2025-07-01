@@ -1,7 +1,9 @@
 :root {
-  --factory-purple: #7C3AED;
-  --factory-purple-light: #9F7AEA;
-  --factory-purple-dark: #6B21A8;
+  /* Authentic Factory orange palette (derived from factory-mono design system) */
+  --factory-orange: #f27b2f;        /* --mica-4 */
+  --factory-orange-light: #f0a330;  /* --mica-6 */
+  --factory-orange-dark: #d56a26;   /* --mica-3 */
+  --factory-orange-hover: #e3992a;  /* --mica-5 */
   --background: #121212;
   --foreground: #F9FAFB;
   --gray-100: #F3F4F6;
@@ -38,7 +40,7 @@ body {
 h1 {
   font-size: 2.5rem;
   margin: 1.5rem 0;
-  background: linear-gradient(90deg, var(--factory-purple-light), var(--factory-purple));
+  background: linear-gradient(90deg, var(--factory-orange-light), var(--factory-orange));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -52,26 +54,26 @@ h1 {
   font-family: monospace;
   font-size: 0.9rem;
   color: var(--gray-200);
-  border-left: 4px solid var(--factory-purple);
+  border-left: 4px solid var(--factory-orange);
 }
 
 .cta {
   display: inline-block;
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
-  background-color: var(--factory-purple);
+  background-color: var(--factory-orange);
   color: white;
   text-decoration: none;
   border-radius: 8px;
   font-weight: 600;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 6px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 4px 6px rgba(242, 123, 47, 0.25);
 }
 
 .cta:hover {
-  background-color: var(--factory-purple-dark);
+  background-color: var(--factory-orange-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 6px 8px rgba(242, 123, 47, 0.3);
 }
 
 .cta:active {
