@@ -8,7 +8,10 @@ export default function App() {
   return (
     <main className="container">
       {/* Use the high-resolution Factory logo */}
-      <img src="/assets/128x128@2x.png" alt="Factory logo" width={128} />
+      {/* Use the authentic Factory star logo */}
+      {/* Display official favicon logo from live Factory app */}
+      {/* Display authentic Factory SVG logo */}
+      <img src="/assets/logo.svg" alt="Factory logo" width={128} />
       <h1>{headline}</h1>
       <SystemInfo />
       <GraduateButton />

@@ -20,4 +20,19 @@ function createWindow () {
   win.loadURL(`http://localhost:${PORT}`);
 }
 
+// Quit when all windows are closed, except on macOS
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+// On macOS, re-create a window when the dock icon is clicked
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+});
+
+// Create window when Electron is ready
 app.whenReady().then(createWindow);

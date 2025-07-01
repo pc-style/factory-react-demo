@@ -34,7 +34,7 @@ describe('App Component', () => {
     render(<App />);
     const logoElement = screen.getByAltText('Factory logo');
     expect(logoElement).toBeInTheDocument();
-    // Expect the high-resolution Factory logo
-    expect(logoElement.getAttribute('src')).toBe('/assets/128x128@2x.png');
+    // Expect the authentic Factory logo SVG
+    expect(logoElement.getAttribute('src')).toBe('/assets/logo.svg');
   });
 });
