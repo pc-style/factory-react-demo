@@ -5,8 +5,8 @@ const PORT = 5173;
 
 function createWindow () {
   const win = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 900,      // Reduced for a more compact demo window
+    height: 600,     // Reduced height for better focus
     title: 'Factory Demo',
     // Use the official 128×128 Factory icon from tutorial assets
     icon: path.join(__dirname, '../assets/128x128.png'),
