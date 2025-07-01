@@ -8,7 +8,8 @@ function createWindow () {
     width: 1200,
     height: 800,
     title: 'Factory Demo',
-    icon: path.join(__dirname, '../assets/factory.png'),
+    // Use the official 128×128 Factory icon from tutorial assets
+    icon: path.join(__dirname, '../assets/128x128.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,

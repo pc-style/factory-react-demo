@@ -7,7 +7,8 @@ export default function App() {
   const [headline] = useState('Factory – Software at Light-Speed');
   return (
     <main className="container">
-      <img src="/assets/factory-logo.svg" alt="Factory logo" width={128} />
+      {/* Use the high-resolution Factory logo */}
+      <img src="/assets/128x128@2x.png" alt="Factory logo" width={128} />
       <h1>{headline}</h1>
       <SystemInfo />
       <GraduateButton />
