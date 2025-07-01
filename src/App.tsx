@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import SystemInfo from './components/SystemInfo';
-import GraduateButton from './components/GraduateButton';
 import './styles.css';
 
 export default function App() {
@@ -14,7 +13,6 @@ export default function App() {
       <img src="/assets/logo.svg" alt="Factory logo" width={128} />
       <h1>{headline}</h1>
       <SystemInfo />
-      <GraduateButton />
     </main>
   );
 }

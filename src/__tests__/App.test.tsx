@@ -4,11 +4,8 @@ import App from '../App';
 
 // Mock the SystemInfo and GraduateButton components to simplify testing
 vi.mock('../components/SystemInfo', () => ({
-  default: () => <div data-testid="system-info">System Info Component</div>
-}));
-
-vi.mock('../components/GraduateButton', () => ({
-  default: () => <div data-testid="graduate-button">Graduate Button Component</div>
+  // The real component now displays “Hello World”
+  default: () => <div data-testid="system-info">Hello World</div>
 }));
 
 describe('App Component', () => {
@@ -22,12 +19,6 @@ describe('App Component', () => {
     render(<App />);
     const systemInfoElement = screen.getByTestId('system-info');
     expect(systemInfoElement).toBeInTheDocument();
-  });
-
-  it('renders GraduateButton component', () => {
-    render(<App />);
-    const graduateButtonElement = screen.getByTestId('graduate-button');
-    expect(graduateButtonElement).toBeInTheDocument();
   });
 
   it('renders Factory logo', () => {

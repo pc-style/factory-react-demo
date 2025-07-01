@@ -10,7 +10,8 @@ declare global {
 }
 
 export default function SystemInfo() {
-  const [systemInfo, setSystemInfo] = useState<string>('Browser environment');
+  // Default to a friendly greeting for the demo
+  const [systemInfo, setSystemInfo] = useState<string>('Hello World');
 
   useEffect(() => {
     // Check if running in Electron with factory API available
@@ -27,7 +28,7 @@ export default function SystemInfo() {
 
   return (
     <div className="system-info">
-      <span>System: {systemInfo}</span>
+      <span>{systemInfo}</span>
     </div>
   );
 }
