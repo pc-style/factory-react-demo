@@ -11,17 +11,8 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts'],
     css: true,
-    coverage: {
-      reporter: ['text', 'json', 'html'],
-      exclude: ['node_modules/', 'src/setupTests.ts'],
-    },
     include: ['src/**/*.{test,spec}.{js,jsx,ts,tsx}'],
     exclude: ['node_modules', 'dist', 'electron'],
-    testTimeout: 10000,
-  },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, './src'),
-    },
+    testTimeout: 3000,
   },
 });

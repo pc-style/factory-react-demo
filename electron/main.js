@@ -9,12 +9,7 @@ function createWindow () {
     height: 600,     // Reduced height for better focus
     title: 'Factory Demo',
     // Use the official 128×128 Factory icon from tutorial assets
-    icon: path.join(__dirname, '../assets/128x128.png'),
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: true,
-      nodeIntegration: false
-    }
+    icon: path.join(__dirname, '../assets/128x128.png')
   });
 
   win.loadURL(`http://localhost:${PORT}`);

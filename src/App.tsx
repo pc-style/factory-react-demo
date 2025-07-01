@@ -1,9 +1,6 @@
-import { useState } from 'react';
-import SystemInfo from './components/SystemInfo';
 import './styles.css';
 
 export default function App() {
-  const [headline] = useState('Factory – Software at Light-Speed');
   return (
     <main className="container">
       {/* Use the high-resolution Factory logo */}
@@ -11,8 +8,16 @@ export default function App() {
       {/* Display official favicon logo from live Factory app */}
       {/* Display authentic Factory SVG logo */}
       <img src="/assets/logo.svg" alt="Factory logo" width={128} />
-      <h1>{headline}</h1>
-      <SystemInfo />
+      {/* Display the Factory wordmark */}
+      <img
+        src="/assets/wordmark.png"
+        alt="Factory wordmark"
+        width={320}
+        className="wordmark"
+      />
+      <div className="hello-world-box">
+        <p>Hello World</p>
+      </div>
     </main>
   );
 }

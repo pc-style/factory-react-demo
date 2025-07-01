@@ -47,7 +47,7 @@ h1 {
   background-clip: text;
 }
 
-.system-info {
+.hello-world-box {
   margin: 1.5rem 0;
   padding: 0.75rem 1.5rem;
   background-color: var(--gray-800);
@@ -86,6 +86,16 @@ img {
   height: auto;
 }
 
+/* === Wordmark styling === */
+.wordmark {
+  /* Give breathing room below the logo */
+  margin: 1.25rem 0 0.5rem;
+  /* Fixed base width but stay responsive on small viewports */
+  width: 320px;
+  max-width: 80%;
+  height: auto;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .container {
@@ -95,6 +105,10 @@ img {
   h1 {
     font-size: 2rem;
   }
+
+  .wordmark {
+    width: 260px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -102,7 +116,7 @@ img {
     font-size: 1.75rem;
   }
   
-  .system-info {
+  .hello-world-box {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
   }
@@ -110,5 +124,9 @@ img {
   .cta {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
+  }
+
+  .wordmark {
+    width: 200px;
   }
 }
