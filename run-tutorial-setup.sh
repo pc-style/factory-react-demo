@@ -73,3 +73,9 @@ echo -e "${YELLOW}To stop the demo, you can close the Electron window or run: pk
 # The trap will ensure cleanup happens when the script process itself is terminated.
 # No explicit `exit 0` here, as the script should remain active to keep the background processes alive.
 # The user will terminate the script (e.g., Ctrl+C), which will trigger the trap.
+
+# --- Keep the script alive ---
+# Wait indefinitely for the concurrently process (which manages Vite and Electron).
+# This blocks the script from exiting, so the cleanup trap only runs when the user
+# interrupts (Ctrl+C) or when the concurrently process naturally exits.
+wait "$NPM_START_PID"
