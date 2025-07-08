@@ -7,7 +7,7 @@ export default function App() {
       {/* Use the authentic Factory star logo */}
       {/* Display official favicon logo from live Factory app */}
       {/* Display authentic Factory SVG logo */}
-      <img src="/assets/logo.svg" alt="Factory logo" width={128} />
+      <img src="/assets/logo.png" alt="Factory logo" width={128} />
       {/* Display the Factory wordmark */}
       <img
         src="/assets/wordmark.png"
