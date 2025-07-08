@@ -44,7 +44,7 @@ echo -e "${YELLOW}🚀 Launching Factory React Demo (Vite + Electron)...${NC}"
 npm run start &
 NPM_START_PID=$! # Store the PID of the concurrently process
 
-# Wait for Vite server to be ready (port 5173)
+# Wait for Vite server to be ready (port 5174)
 echo -e "${YELLOW}⏳ Waiting for the demo application to become responsive...${NC}"
 TIMEOUT=30 # seconds
 for i in $(seq 1 $TIMEOUT); do

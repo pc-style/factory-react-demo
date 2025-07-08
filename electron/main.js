@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-const PORT = 5173;
+const PORT = 5174;
 
 function createWindow () {
   const win = new BrowserWindow({

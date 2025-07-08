@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "electron": "electron .",
-    "start": "concurrently \"npm run dev\" \"wait-on tcp:5173 && npm run electron\"",
+    "start": "concurrently \"npm run dev\" \"wait-on tcp:5174 && npm run electron\"",
     "test": "vitest run",
     "lint": "eslint src --ext ts,tsx"
   },
