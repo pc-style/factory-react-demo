@@ -48,7 +48,7 @@ NPM_START_PID=$! # Store the PID of the concurrently process
 echo -e "${YELLOW}⏳ Waiting for the demo application to become responsive...${NC}"
 TIMEOUT=30 # seconds
 for i in $(seq 1 $TIMEOUT); do
-  if curl -s http://localhost:5173 > /dev/null; then
+  if curl -s http://localhost:5174 > /dev/null; then
     echo -e "${GREEN}🌐 Demo application is responsive!${NC}"
     break
   fi
