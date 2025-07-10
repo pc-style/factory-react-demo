@@ -9,10 +9,16 @@ function createWindow () {
     height: 600,     // Reduced height for better focus
     title: 'Factory Demo',
     // Use the official 128×128 Factory icon from tutorial assets
-    icon: path.join(__dirname, '../assets/128x128.png')
+    icon: path.join(__dirname, '../assets/128x128.png'),
+    // Ensure the window is given focus when created
+    focus: true
   });
 
   win.loadURL(`http://localhost:${PORT}`);
+
+  // Explicitly focus the window after it finishes loading to bring it
+  // to the foreground on application start.
+  win.focus();
 }
 
 // Quit when all windows are closed, except on macOS
