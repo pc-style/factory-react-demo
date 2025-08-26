@@ -327,26 +327,23 @@ img {
 }
 
 /* ===== Collapsible sidebar ===== */
+/* main grid becomes full-width when collapsed */
 .app-shell.collapsed {
-  grid-template-columns: 56px 1fr;
+  grid-template-columns: 0 1fr;
 }
+
+/* hide sidebar entirely */
 .sidebar.collapsed {
-  width: 56px;
-  padding: 1rem 0.5rem;
-}
-.sidebar.collapsed h2 {
   display: none;
 }
-.sidebar.collapsed .category-item {
-  text-indent: -9999px; /* hide text */
-  position: relative;
-}
-.sidebar.collapsed .category-item::before {
-  content: '•';
-  text-indent: 0;
-  display: block;
-  text-align: center;
-  color: inherit;
+
+/* ===== Floating (FAB) menu button shown when sidebar collapsed ===== */
+.menu-fab {
+  position: fixed;
+  left: 12px;
+  top: 84px;          /* below toolbar */
+  z-index: 50;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
 /* === Wordmark styling === */
@@ -391,5 +388,32 @@ img {
 
   .wordmark {
     width: 200px;
+  }
+}
+
+/* ===== Toast (temporary notification) ===== */
+.toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  background: var(--background-elevated);
+  color: var(--foreground);
+  border: 1px solid var(--gray-800);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  z-index: 100;
+  font-size: 0.9rem;
+  animation: toast-fadein 0.2s ease-out;
+}
+
+@keyframes toast-fadein {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

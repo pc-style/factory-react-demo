@@ -35,6 +35,18 @@ export default function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [selected, setSelected] = useState<DocItem | null>(null);
 
+  /* ---------- ui feedback ---------- */
+  const [toast, setToast] = useState<string>('');
+  const showToast = (msg: string) => {
+    setToast(msg);
+  };
+  // auto-dismiss toast after 3 s
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(''), 3000);
+    return () => clearTimeout(t);
+  }, [toast]);
+
   /* ---------- layout ---------- */
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
   const toggleSidebar = () => setSidebarCollapsed((c) => !c);
@@ -84,10 +96,20 @@ export default function App() {
     await window.docs.open(absPath);
   };
   const handleReveal = async (absPath: string) => {
-    await window.docs.reveal(absPath);
+    const ok = await window.docs.reveal(absPath);
+    showToast(ok ? 'Otworzono w eksploratorze' : 'Nie udało się otworzyć');
   };
   const handleCopyPath = async (absPath: string) => {
-    await window.docs.copyPath(absPath);
+    let ok = await window.docs.copyPath(absPath);
+    if (!ok && navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(absPath);
+        ok = true;
+      } catch {
+        /* ignore */
+      }
+    }
+    showToast(ok ? 'Ścieżka skopiowana' : 'Nie udało się skopiować');
   };
 
   /* ---------- render ---------- */
@@ -117,6 +139,16 @@ export default function App() {
 
       {/* ===== Main content ===== */}
       <main className="main">
+        {/* floating reopen button */}
+        {sidebarCollapsed && (
+          <button
+            className="menu-fab btn-ghost btn-sm"
+            aria-label="Pokaż menu"
+            onClick={toggleSidebar}
+          >
+            <MenuIcon className="icon" />
+          </button>
+        )}
         <h1>Przeglądarka dokumentów medycznych</h1>
 
         {/* Toolbar */}
@@ -259,6 +291,8 @@ export default function App() {
             ))}
           </ul>
         )}
+        {/* toast notification */}
+        {toast && <div className="toast">{toast}</div>}
       </main>
     </div>
   );
