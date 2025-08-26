@@ -7,11 +7,13 @@
     "electron": "electron .",
     "start": "concurrently \"npm run dev\" \"wait-on tcp:5174 && npm run electron\"",
     "test": "vitest run",
-    "lint": "eslint src --ext ts,tsx"
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --config .eslintrc.js \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "react": "^18.3.0",
-    "react-dom": "^18.3.0"
+    "react-dom": "^18.3.0",
+    "fast-glob": "^3.3.2",
+    "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6",

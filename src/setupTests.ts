@@ -25,3 +25,19 @@ Object.defineProperty(window, 'factory', {
   writable: true,
   configurable: true,
 });
+
+/**
+ * Mock of the `window.docs` API exposed by the new preload script.
+ * Provides basic async stubs so components relying on the API
+ * can run in the test environment without Electron.
+ */
+Object.defineProperty(window, 'docs', {
+  value: {
+    meta: vi.fn().mockResolvedValue({ categories: [], years: [] }),
+    list: vi.fn().mockResolvedValue([]),
+    search: vi.fn().mockResolvedValue([]),
+    open: vi.fn().mockResolvedValue(true),
+  },
+  writable: true,
+  configurable: true,
+});

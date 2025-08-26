@@ -1,0 +1,101 @@
+Medical_Documents/
+├── 01_Badania_Krwi/
+│   ├── 2007/
+│   │   └── 2007-10-13_morfologia_krew.pdf
+│   ├── 2023/
+│   │   ├── 2023-03-15_wyniki_krwi.pdf
+│   │   └── 2023-06-00_morfologia_krew.pdf
+│   ├── 2024/
+│   │   ├── 2024-03-15_morfologia_krew.pdf
+│   │   ├── 2024-09-00_morfologia_krew.pdf
+│   │   └── 2024-09-00_panel_badan_krew.pdf
+│   └── 2025/
+│       └── 2025-03-28_morfologia_krew.pdf
+├── 02_Rezonans_Magnetyczny/
+│   ├── 2022/
+│   │   ├── opis_MR_11_22_ocr.pdf
+│   │   └── opis_MR_30_11_22_ocr.pdf
+│   ├── 2023/
+│   │   ├── 2023-02-16_opis_mr_glowa.pdf
+│   │   ├── 2023-06-00_opis_mr_glowa.pdf
+│   │   └── 2023-09-00_opis_mr_glowa.pdf
+│   ├── 2024/
+│   │   ├── 2024-01-00_opis_mr_glowa.pdf
+│   │   ├── 2024-01-00_opis_mr_glowa_kontrola.pdf
+│   │   ├── 2024-06-00_opis_mr_glowa.pdf
+│   │   └── 2024-06-00_opis_mr_glowa_kontrola.pdf
+│   └── 2025/
+│       └── 2025-01-00_opis_mr_glowa.pdf
+├── 03_Radiologia/
+│   └── 2024/
+│       └── 2024-09-00_rtg_klatka_piersiowa.pdf
+├── 04_Endokrynologia/
+│   └── 2024/
+│       └── 2024-07-00_konsultacja_endokrynologiczna.pdf
+├── 05_Gastroenterologia/
+│   ├── 2022/
+│   │   └── rozpoznanie_histopatologiczne_13_12_2022_ocr.pdf
+│   ├── 2024/
+│   │   ├── 2024-09-00_enterografia_jelita.pdf
+│   │   └── 2024-09-24_karta_informacyjna_gastroenterologia.pdf
+│   └── 2025/
+│       └── 2025-09-00_histopatologia_gastroenterologia.pdf
+├── 06_Psychiatria/
+│   ├── 2023/
+│   │   ├── wypis_o_psychiatryczny_szpitalna_luty_2023_1_ocr.pdf
+│   │   └── wypis_o_psychiatryczny_szpitalna_luty_2023_2_ocr.pdf
+│   └── 2024/
+│       ├── 2024-00-00_odmowa_przyjecia_psychiatria.pdf
+│       └── 2024-00-00_zaswiadczenie_matura_psychiatra.pdf
+├── 07_Dokumentacja_Szpitalna/
+│   └── 2022/
+│       ├── 2022-11-16_wypis_szpitalny_hcp.pdf
+│       └── 2022-11-23_wypis_szpitalny.pdf
+├── 08_Genetika/
+│   └── 2023/
+│       ├── badania_genetyczne_1_ocr.pdf
+│       └── badania_genetyczne_2_ocr.pdf
+├── 09_Rozwój_Nauczanie/
+│   ├── Dysgrafia/
+│   │   ├── dysgrafia_1_ocr.pdf
+│   │   ├── dysgrafia_2_ocr.pdf
+│   │   ├── dysgrafia_3_ocr.pdf
+│   │   └── dysgrafia_4_ocr.pdf
+│   └── Indywidualne_Nauczanie/
+│       ├── indywidualne_nauczanie_1_ocr.pdf
+│       ├── indywidualne_nauczanie_2_ocr.pdf
+│       ├── indywidualne_nauczanie_3_ocr.pdf
+│       ├── indywidualne_nauczanie_4_ocr.pdf
+│       └── indywidualne_nauczanie_5_ocr.pdf
+├── 10_Dokumenty_Szkolne/
+│   ├── plan_bezpieczeństwa_Adam_ocr.pdf
+│   ├── Przedszkole/
+│   │   ├── gotowość_rozpoczęcie_podstawówki_1_ocr.pdf
+│   │   ├── gotowość_rozpoczęcie_podstawówki_2_ocr.pdf
+│   │   ├── opinia_koniec_przedszkola_1_ocr.pdf
+│   │   └── opinia_koniec_przedszkola_2_ocr.pdf
+│   └── Szkoła_Podstawowa/
+│       ├── świadectwo_kl1_1_ocr.pdf
+│       ├── świadectwo_kl1_2_ocr.pdf
+│       ├── świadectwo_kl2_1_ocr.pdf
+│       ├── świadectwo_kl2_2_ocr.pdf
+│       ├── świadectwo_kl3_1_ocr.pdf
+│       └── świadectwo_kl3_2_ocr.pdf
+├── 11_Inne_Badania/
+│   └── 2024/
+│       ├── 2024-00-00_badania_hormonalne.pdf
+│       ├── 2024-00-00_badanie_bialko_mmr.pdf
+│       ├── 2024-00-00_oscheck_medyczne.pdf
+│       ├── 2024-03-15_karbamazepina_wyniki.pdf
+│       ├── 2024-06-19_kreatynina_wyniki.pdf
+│       ├── 2024-07-00_osmolalnosc_mocz.pdf
+│       ├── 2024-10-09_badanie_narkotyki.pdf
+│       ├── 2024-12-00_kreatynina_wyniki.pdf
+│       ├── 2025-04-02_osmolalnosc_mocz.pdf
+│       └── 2025-04-07_osmolalnosc_mocz.pdf
+└── 12_Leki_Orzeczenia/
+    └── 2024/
+        ├── 2024-00-00_karta_szczepien.pdf
+        ├── 2024-00-00_recepta_nootropil.pdf
+        ├── 2024-00-00_zaswiadczenie_wf.pdf
+        └── 2024-00-00_zaswiadczenie_wf_duplikat.pdf

@@ -2,19 +2,38 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import App from '../App';
 
-describe('App Component', () => {
-  it('renders Factory logo', () => {
+describe('App Component – Polish UI', () => {
+  it('renders the main heading', () => {
     render(<App />);
-    const logoElement = screen.getByAltText('Factory logo');
-    expect(logoElement).toBeInTheDocument();
-    // Expect the authentic Factory logo SVG
-    expect(logoElement.getAttribute('src')).toBe('/assets/logo.svg');
+    const heading = screen.getByRole('heading', {
+      name: /Przeglądarka dokumentów medycznych/i,
+    });
+    expect(heading).toBeInTheDocument();
   });
 
-  it('renders Factory wordmark', () => {
+  it('renders filter controls', () => {
     render(<App />);
-    const wordmarkElement = screen.getByAltText('Factory wordmark');
-    expect(wordmarkElement).toBeInTheDocument();
-    expect(wordmarkElement.getAttribute('src')).toBe('/assets/wordmark.png');
+
+    // Category select
+    const categoryLabel = screen.getByLabelText(/Kategoria:/i);
+    expect(categoryLabel).toBeInTheDocument();
+
+    // Year select
+    const yearLabel = screen.getByLabelText(/Rok:/i);
+    expect(yearLabel).toBeInTheDocument();
+
+    // Search input (using placeholder)
+    const searchInput = screen.getByPlaceholderText(
+      /Nazwa pliku lub treść PDF…/i,
+    );
+    expect(searchInput).toBeInTheDocument();
+  });
+
+  it('shows empty state when no documents returned', async () => {
+    render(<App />);
+
+    // Wait for the empty-state text after loading finishes
+    const emptyState = await screen.findByText(/Brak wyników\./i);
+    expect(emptyState).toBeInTheDocument();
   });
 });
