@@ -72,91 +72,91 @@ export default function App() {
 
   /* ---------- render ---------- */
   return (
-    <main className="container" style={{ maxWidth: 960 }}>
-      <h1>Przeglądarka dokumentów medycznych</h1>
-
-      {/* Controls */}
-      <div
-        style={{
-          display: 'flex',
-          gap: '0.5rem',
-          marginBottom: '1rem',
-          flexWrap: 'wrap',
-        }}
-      >
-        {/* category select */}
-        <label>
-          Kategoria:{' '}
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+    <div className="app-shell">
+      {/* ===== Sidebar ===== */}
+      <aside className="sidebar">
+        <h2>Kategorie</h2>
+        <ul className="list">
+          <li
+            className={`category-item ${category === '' ? 'active' : ''}`}
+            onClick={() => setCategory('')}
           >
-            <option value="">Wszystkie</option>
-            {categories.map((c) => (
-              <option key={c.key} value={c.key}>
-                {c.label}
-              </option>
-            ))}
-          </select>
-        </label>
+            Wszystkie
+          </li>
+          {categories.map((c) => (
+            <li
+              key={c.key}
+              className={`category-item ${category === c.key ? 'active' : ''}`}
+              onClick={() => setCategory(c.key)}
+            >
+              {c.label}
+            </li>
+          ))}
+        </ul>
+      </aside>
 
-        {/* year select */}
-        <label>
-          Rok:{' '}
-          <select value={year} onChange={(e) => setYear(e.target.value)}>
-            <option value="">Wszystkie</option>
-            {years.map((y) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
-        </label>
+      {/* ===== Main content ===== */}
+      <main className="main">
+        <h1>Przeglądarka dokumentów medycznych</h1>
 
-        {/* search input */}
-        <label style={{ flex: 1 }}>
-          Szukaj:{' '}
+        {/* Toolbar */}
+        <div className="toolbar">
+          <label>
+            Rok:{' '}
+            <select
+              className="select"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            >
+              <option value="">Wszystkie</option>
+              {years.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </select>
+          </label>
+
           <input
-            style={{ width: '100%' }}
+            className="input"
             type="text"
             value={query}
             placeholder="Nazwa pliku lub treść PDF…"
             onChange={(e) => setQuery(e.target.value)}
+            style={{ flex: 1, minWidth: '160px' }}
           />
-        </label>
-      </div>
 
-      {/* results */}
-      {loading ? (
-        <p>Ładowanie…</p>
-      ) : docs.length === 0 ? (
-        <p>Brak wyników.</p>
-      ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {docs.map((doc) => (
-            <li
-              key={doc.id}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '0.5rem 0',
-                borderBottom: '1px solid #ddd',
-              }}
-            >
-              <div>
-                <strong>{doc.filename}</strong>
-                <div style={{ fontSize: '0.85rem', color: '#666' }}>
-                  {doc.categoryLabel} {doc.year ? `• ${doc.year}` : ''}
+          {/* Result count */}
+          {!loading && (
+            <span style={{ marginLeft: 'auto', color: 'var(--gray-300)' }}>
+              {docs.length} wyników
+            </span>
+          )}
+        </div>
+
+        {/* results */}
+        {loading ? (
+          <p>Ładowanie…</p>
+        ) : docs.length === 0 ? (
+          <p>Brak wyników.</p>
+        ) : (
+          <ul className="list">
+            {docs.map((doc) => (
+              <li key={doc.id} className="list-item">
+                <div>
+                  <strong>{doc.filename}</strong>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--gray-300)' }}>
+                    {doc.categoryLabel} {doc.year ? `• ${doc.year}` : ''}
+                  </div>
                 </div>
-              </div>
-              <button className="cta" onClick={() => handleOpen(doc.absPath)}>
-                Otwórz
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </main>
+                <button className="btn" onClick={() => handleOpen(doc.absPath)}>
+                  Otwórz
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </main>
+    </div>
   );
 }

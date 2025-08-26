@@ -14,9 +14,9 @@ describe('App Component – Polish UI', () => {
   it('renders filter controls', () => {
     render(<App />);
 
-    // Category select
-    const categoryLabel = screen.getByLabelText(/Kategoria:/i);
-    expect(categoryLabel).toBeInTheDocument();
+    // Sidebar heading for categories
+    const sidebarHeading = screen.getByRole('heading', { name: /Kategorie/i });
+    expect(sidebarHeading).toBeInTheDocument();
 
     // Year select
     const yearLabel = screen.getByLabelText(/Rok:/i);
