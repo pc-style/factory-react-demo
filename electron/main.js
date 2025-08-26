@@ -3,7 +3,7 @@ const path = require('path');
 // Local helpers for indexing/searching documents
 const docIndex = require('./docIndex');
 
-const PORT = 5174;
+const PORT = process.env.PORT || 5176;
 // Absolute path to the local documents directory
 const DOCS_DIR = path.join(__dirname, '../documents');
 

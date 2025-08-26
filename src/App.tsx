@@ -290,8 +290,18 @@ export default function App() {
 
           {/* Result count */}
           {!loading && (
-            <span style={{ marginLeft: 'auto', color: 'var(--gray-300)' }}>
-              {docs.length} wyników
+            <span style={{ 
+              marginLeft: 'auto', 
+              color: 'var(--gray-400)', 
+              fontSize: 'var(--font-size-sm)',
+              fontWeight: '500',
+              background: 'var(--background-glass)',
+              padding: 'var(--space-2) var(--space-3)',
+              borderRadius: 'var(--radius)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(148, 163, 184, 0.1)'
+            }}>
+              {docs.length} {docs.length === 1 ? 'wynik' : docs.length < 5 ? 'wyniki' : 'wyników'}
             </span>
           )}
         </div>
@@ -308,9 +318,9 @@ export default function App() {
 
         {/* results */}
         {loading ? (
-          <p>Ładowanie…</p>
+          <div className="loading">Ładowanie dokumentów...</div>
         ) : docs.length === 0 ? (
-          <p>Brak wyników.</p>
+          <div className="empty-state">Brak wyników dla podanych kryteriów</div>
         ) : (
           <ul className="list">
             {docs.map((doc) => (
@@ -321,13 +331,15 @@ export default function App() {
                 }`}
               >
                 <div
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', display: 'flex', alignItems: 'flex-start', gap: 'var(--space-3)' }}
                   onClick={() => setSelected(doc)}
                 >
-                  <PdfIcon className="icon" style={{ marginRight: '0.4rem' }} />
-                  <strong>{doc.filename}</strong>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--gray-300)' }}>
-                    {doc.categoryLabel} {doc.year ? `• ${doc.year}` : ''}
+                  <PdfIcon className="icon" style={{ marginTop: 'var(--space-1)', flexShrink: 0 }} />
+                  <div>
+                    <strong>{doc.filename}</strong>
+                    <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--gray-400)', marginTop: 'var(--space-1)' }}>
+                      {doc.categoryLabel} {doc.year ? `• ${doc.year}` : ''}
+                    </div>
                   </div>
                 </div>
                 <div className="actions">
