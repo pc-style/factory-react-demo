@@ -1,5 +1,14 @@
 import './styles.css';
 import { useEffect, useState } from 'react';
+import {
+  MenuIcon,
+  SearchIcon,
+  PdfIcon,
+  OpenIcon,
+  RevealIcon,
+  CopyIcon,
+  CloseIcon,
+} from './icons';
 
 type Category = { key: string; label: string };
 
@@ -114,12 +123,12 @@ export default function App() {
         <div className="toolbar sticky">
           {/* sidebar toggle */}
           <button
-            className="btn-ghost"
+            className="btn-ghost btn-sm"
             type="button"
             onClick={toggleSidebar}
             aria-label="Zwiń/rozwiń menu"
           >
-            ☰
+            <MenuIcon className="icon" />
           </button>
 
           <label>
@@ -138,14 +147,17 @@ export default function App() {
             </select>
           </label>
 
-          <input
-            className="input"
-            type="text"
-            value={query}
-            placeholder="Nazwa pliku lub treść PDF…"
-            onChange={(e) => setQuery(e.target.value)}
-            style={{ flex: 1, minWidth: '160px' }}
-          />
+          <div className="input-group" style={{ flex: 1, minWidth: '160px' }}>
+            <SearchIcon className="icon icon-left" />
+            <input
+              className="input"
+              type="text"
+              value={query}
+              placeholder="Nazwa pliku lub treść PDF…"
+              onChange={(e) => setQuery(e.target.value)}
+              style={{ width: '100%' }}
+            />
+          </div>
 
           {/* chips for active filters */}
           <div className="chips" style={{ marginLeft: 'auto' }}>
@@ -153,7 +165,7 @@ export default function App() {
               <span className="chip">
                 {categories.find((c) => c.key === category)?.label || category}
                 <span className="close" onClick={() => setCategory('')}>
-                  ×
+                  <CloseIcon className="icon" />
                 </span>
               </span>
             )}
@@ -161,7 +173,7 @@ export default function App() {
               <span className="chip">
                 {year}
                 <span className="close" onClick={() => setYear('')}>
-                  ×
+                  <CloseIcon className="icon" />
                 </span>
               </span>
             )}
@@ -169,7 +181,7 @@ export default function App() {
               <span className="chip">
                 „{query}”
                 <span className="close" onClick={() => setQuery('')}>
-                  ×
+                  <CloseIcon className="icon" />
                 </span>
               </span>
             )}
@@ -201,11 +213,17 @@ export default function App() {
         ) : (
           <ul className="list">
             {docs.map((doc) => (
-              <li key={doc.id} className="list-item">
+              <li
+                key={doc.id}
+                className={`list-item ${
+                  selected?.id === doc.id ? 'selected' : ''
+                }`}
+              >
                 <div
                   style={{ cursor: 'pointer' }}
                   onClick={() => setSelected(doc)}
                 >
+                  <PdfIcon className="icon" style={{ marginRight: '0.4rem' }} />
                   <strong>{doc.filename}</strong>
                   <div style={{ fontSize: '0.85rem', color: 'var(--gray-300)' }}>
                     {doc.categoryLabel} {doc.year ? `• ${doc.year}` : ''}
@@ -215,19 +233,25 @@ export default function App() {
                   <button
                     className="btn"
                     onClick={() => handleOpen(doc.absPath)}
+                    aria-label="Otwórz dokument"
                   >
+                    <OpenIcon className="icon" />
                     Otwórz
                   </button>
                   <button
                     className="btn-ghost"
                     onClick={() => handleReveal(doc.absPath)}
+                    aria-label="Pokaż dokument w folderze"
                   >
+                    <RevealIcon className="icon" />
                     Pokaż w folderze
                   </button>
                   <button
                     className="btn-ghost"
                     onClick={() => handleCopyPath(doc.absPath)}
+                    aria-label="Kopiuj pełną ścieżkę dokumentu"
                   >
+                    <CopyIcon className="icon" />
                     Kopiuj ścieżkę
                   </button>
                 </div>
