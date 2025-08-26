@@ -12,6 +12,46 @@ import {
 
 type Category = { key: string; label: string };
 
+/* ---------- global typings for Electron preload API ---------- */
+declare global {
+  interface Window {
+    docs?: {
+      reveal?: (p: string) => Promise<boolean>;
+      copyPath?: (p: string) => Promise<boolean>;
+      open?: (p: string) => Promise<boolean>;
+      meta?: () => Promise<DocsMeta>;
+      list?: (f?: DocsFilter) => Promise<DocumentItem[]>;
+      search?: (p: SearchParams) => Promise<DocumentItem[]>;
+    };
+  }
+
+  /* ===== Minimal duplicates of shared types (to keep this file self-contained
+     and satisfy lint without importing from TS declaration file) ===== */
+  interface DocsMeta {
+    categories: Category[];
+    years: string[];
+  }
+
+  interface DocsFilter {
+    category?: string;
+    year?: string;
+  }
+
+  interface SearchParams {
+    q?: string;
+    category?: string;
+    year?: string;
+  }
+
+  interface DocumentItem {
+    id: string;
+    filename: string;
+    categoryLabel: string;
+    year: string | null;
+    absPath: string;
+  }
+}
+
 interface DocItem {
   id: string;
   filename: string;
@@ -50,6 +90,11 @@ export default function App() {
   /* ---------- layout ---------- */
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
   const toggleSidebar = () => setSidebarCollapsed((c) => !c);
+
+  /* ---------- environment ---------- */
+  // Native (Electron) features available only when preload injected
+  const canUseNative =
+    !!window.docs && typeof window.docs.reveal === 'function';
 
   /* ---------- fetch meta on mount ---------- */
   useEffect(() => {
@@ -96,11 +141,35 @@ export default function App() {
     await window.docs.open(absPath);
   };
   const handleReveal = async (absPath: string) => {
-    const ok = await window.docs.reveal(absPath);
-    showToast(ok ? 'Otworzono w eksploratorze' : 'Nie udało się otworzyć');
+    if (!canUseNative) {
+      showToast('Funkcja niedostępna w przeglądarce');
+      return;
+    }
+    try {
+      const ok = await window.docs.reveal(absPath);
+      showToast(ok ? 'Otworzono w eksploratorze' : 'Nie udało się otworzyć');
+    } catch (err) {
+      console.error(err);
+      showToast('Nie udało się otworzyć');
+    }
   };
   const handleCopyPath = async (absPath: string) => {
-    let ok = await window.docs.copyPath(absPath);
+    if (!canUseNative) {
+      // Try clipboard fallback directly
+      try {
+        await navigator.clipboard.writeText(absPath);
+        showToast('Ścieżka skopiowana');
+      } catch {
+        showToast('Funkcja niedostępna w przeglądarce');
+      }
+      return;
+    }
+    let ok = false;
+    try {
+      ok = await window.docs.copyPath(absPath);
+    } catch (err) {
+      console.error(err);
+    }
     if (!ok && navigator.clipboard?.writeText) {
       try {
         await navigator.clipboard.writeText(absPath);
