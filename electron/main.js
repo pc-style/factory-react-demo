@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell } = require('electron');
+const { app, BrowserWindow, ipcMain, shell, clipboard } = require('electron');
 const path = require('path');
 // Local helpers for indexing/searching documents
 const docIndex = require('./docIndex');
@@ -6,6 +6,17 @@ const docIndex = require('./docIndex');
 const PORT = 5174;
 // Absolute path to the local documents directory
 const DOCS_DIR = path.join(__dirname, '../documents');
+
+/**
+ * Resolve path and verify it belongs to documents directory.
+ * Returns the resolved absolute path or null when outside DOCS_DIR.
+ * @param {string} absPath
+ */
+function safeResolve(absPath) {
+  if (typeof absPath !== 'string') return null;
+  const resolved = path.resolve(absPath);
+  return resolved.startsWith(DOCS_DIR) ? resolved : null;
+}
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -65,13 +76,9 @@ ipcMain.handle('docs:search', async (_event, params) => {
 
 ipcMain.handle('docs:open', async (_event, absPath) => {
   try {
-    if (typeof absPath !== 'string') {
-      return false;
-    }
-    const resolved = path.resolve(absPath);
-    // Security: ensure file resides within the configured documents directory
-    if (!resolved.startsWith(DOCS_DIR)) {
-      console.warn('Attempt to open file outside documents dir:', resolved);
+    const resolved = safeResolve(absPath);
+    if (!resolved) {
+      console.warn('Attempt to open file outside documents dir:', absPath);
       return false;
     }
     await shell.openPath(resolved);
@@ -80,4 +87,30 @@ ipcMain.handle('docs:open', async (_event, absPath) => {
     console.error('Failed to open document:', error);
     return false;
   }
+});
+
+/**
+ * Reveal document in OS file manager
+ */
+ipcMain.handle('docs:reveal', async (_event, absPath) => {
+  const resolved = safeResolve(absPath);
+  if (!resolved) {
+    console.warn('Attempt to reveal file outside documents dir:', absPath);
+    return false;
+  }
+  shell.showItemInFolder(resolved);
+  return true;
+});
+
+/**
+ * Copy absolute path of document to clipboard
+ */
+ipcMain.handle('docs:copyPath', async (_event, absPath) => {
+  const resolved = safeResolve(absPath);
+  if (!resolved) {
+    console.warn('Attempt to copy path outside documents dir:', absPath);
+    return false;
+  }
+  clipboard.writeText(resolved);
+  return true;
 });

@@ -24,6 +24,11 @@ export default function App() {
   /* ---------- data ---------- */
   const [docs, setDocs] = useState<DocItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [selected, setSelected] = useState<DocItem | null>(null);
+
+  /* ---------- layout ---------- */
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
+  const toggleSidebar = () => setSidebarCollapsed((c) => !c);
 
   /* ---------- fetch meta on mount ---------- */
   useEffect(() => {
@@ -69,12 +74,18 @@ export default function App() {
   const handleOpen = async (absPath: string) => {
     await window.docs.open(absPath);
   };
+  const handleReveal = async (absPath: string) => {
+    await window.docs.reveal(absPath);
+  };
+  const handleCopyPath = async (absPath: string) => {
+    await window.docs.copyPath(absPath);
+  };
 
   /* ---------- render ---------- */
   return (
-    <div className="app-shell">
+    <div className={`app-shell${sidebarCollapsed ? ' collapsed' : ''}`}>
       {/* ===== Sidebar ===== */}
-      <aside className="sidebar">
+      <aside className={`sidebar${sidebarCollapsed ? ' collapsed' : ''}`}>
         <h2>Kategorie</h2>
         <ul className="list">
           <li
@@ -100,7 +111,17 @@ export default function App() {
         <h1>Przeglądarka dokumentów medycznych</h1>
 
         {/* Toolbar */}
-        <div className="toolbar">
+        <div className="toolbar sticky">
+          {/* sidebar toggle */}
+          <button
+            className="btn-ghost"
+            type="button"
+            onClick={toggleSidebar}
+            aria-label="Zwiń/rozwiń menu"
+          >
+            ☰
+          </button>
+
           <label>
             Rok:{' '}
             <select
@@ -126,6 +147,34 @@ export default function App() {
             style={{ flex: 1, minWidth: '160px' }}
           />
 
+          {/* chips for active filters */}
+          <div className="chips" style={{ marginLeft: 'auto' }}>
+            {category && (
+              <span className="chip">
+                {categories.find((c) => c.key === category)?.label || category}
+                <span className="close" onClick={() => setCategory('')}>
+                  ×
+                </span>
+              </span>
+            )}
+            {year && (
+              <span className="chip">
+                {year}
+                <span className="close" onClick={() => setYear('')}>
+                  ×
+                </span>
+              </span>
+            )}
+            {query && (
+              <span className="chip">
+                „{query}”
+                <span className="close" onClick={() => setQuery('')}>
+                  ×
+                </span>
+              </span>
+            )}
+          </div>
+
           {/* Result count */}
           {!loading && (
             <span style={{ marginLeft: 'auto', color: 'var(--gray-300)' }}>
@@ -133,6 +182,16 @@ export default function App() {
             </span>
           )}
         </div>
+
+        {/* Preview panel */}
+        {selected && (
+          <div className="preview">
+            <embed
+              src={`file://${encodeURI(selected.absPath)}`}
+              type="application/pdf"
+            />
+          </div>
+        )}
 
         {/* results */}
         {loading ? (
@@ -143,15 +202,35 @@ export default function App() {
           <ul className="list">
             {docs.map((doc) => (
               <li key={doc.id} className="list-item">
-                <div>
+                <div
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setSelected(doc)}
+                >
                   <strong>{doc.filename}</strong>
                   <div style={{ fontSize: '0.85rem', color: 'var(--gray-300)' }}>
                     {doc.categoryLabel} {doc.year ? `• ${doc.year}` : ''}
                   </div>
                 </div>
-                <button className="btn" onClick={() => handleOpen(doc.absPath)}>
-                  Otwórz
-                </button>
+                <div className="actions">
+                  <button
+                    className="btn"
+                    onClick={() => handleOpen(doc.absPath)}
+                  >
+                    Otwórz
+                  </button>
+                  <button
+                    className="btn-ghost"
+                    onClick={() => handleReveal(doc.absPath)}
+                  >
+                    Pokaż w folderze
+                  </button>
+                  <button
+                    className="btn-ghost"
+                    onClick={() => handleCopyPath(doc.absPath)}
+                  >
+                    Kopiuj ścieżkę
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

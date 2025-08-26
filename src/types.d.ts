@@ -92,6 +92,20 @@ interface DocsAPI {
    * @returns Promise resolving to true if successful, false otherwise
    */
   open(absPath: string): Promise<boolean>;
+
+  /**
+   * Reveal the document in the operating-system file manager
+   * @param absPath Absolute path to the document
+   * @returns Promise resolving to true if successful, false otherwise
+   */
+  reveal(absPath: string): Promise<boolean>;
+
+  /**
+   * Copy the absolute path of the document to the clipboard
+   * @param absPath Absolute path to the document
+   * @returns Promise resolving to true if successful, false otherwise
+   */
+  copyPath(absPath: string): Promise<boolean>;
 }
 
 // Extend Window interface to include our docs API

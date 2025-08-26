@@ -67,5 +67,43 @@ contextBridge.exposeInMainWorld('docs', {
       console.error('Error opening document:', error);
       return false;
     }
+  },
+
+  /**
+   * Reveal a document in the operating-system file manager
+   * @param {string} absPath - Absolute path to the document
+   * @returns {Promise<boolean>} - True if successful, false otherwise
+   */
+  reveal: async (absPath) => {
+    if (!absPath || typeof absPath !== 'string') {
+      console.error('Invalid document path');
+      return false;
+    }
+
+    try {
+      return await ipcRenderer.invoke('docs:reveal', absPath);
+    } catch (error) {
+      console.error('Error revealing document:', error);
+      return false;
+    }
+  },
+
+  /**
+   * Copy the absolute path of a document to the clipboard
+   * @param {string} absPath - Absolute path to the document
+   * @returns {Promise<boolean>} - True if successful, false otherwise
+   */
+  copyPath: async (absPath) => {
+    if (!absPath || typeof absPath !== 'string') {
+      console.error('Invalid document path');
+      return false;
+    }
+
+    try {
+      return await ipcRenderer.invoke('docs:copyPath', absPath);
+    } catch (error) {
+      console.error('Error copying document path:', error);
+      return false;
+    }
   }
 });
