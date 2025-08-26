@@ -15,7 +15,20 @@ const DOCS_DIR = path.join(__dirname, '../documents');
 function safeResolve(absPath) {
   if (typeof absPath !== 'string') return null;
   const resolved = path.resolve(absPath);
-  return resolved.startsWith(DOCS_DIR) ? resolved : null;
+  return isInside(DOCS_DIR, resolved) ? resolved : null;
+}
+
+/**
+ * Check if target path is inside base path (after resolving & normalising).
+ * Uses path.relative to avoid simple-prefix pitfalls (e.g. /docs vs /docs2).
+ * @param {string} base
+ * @param {string} target
+ * @returns {boolean}
+ */
+function isInside(base, target) {
+  const rel = path.relative(path.resolve(base), path.resolve(target));
+  // If relative path starts with '..' it is outside the base dir.
+  return !!rel && !rel.startsWith('..') && !path.isAbsolute(rel);
 }
 
 function createWindow () {
